@@ -3,20 +3,20 @@ spring:
       name: spring-ai-LLM
 
   ai:
+    openai:
+      api-key: key-from-openai-console
+
     ollama:
-      base-url: http://localhost:11434/
+      base-url: http://localhost:11434
       chat:
         model: llama3.2:1b
 
-#  ai:
-#    openai:
-#      api-key: ${OPENAI_API_KEY}
-
-#  ai:
-#    google:
-#      genai:
-#        api-key: ${GEMINI_API_KEY}
-
+    google:
+      genai:
+        api-key: key-from-google-cloud-console
+        chat:
+          options:
+            model: gemini-2.5-flash
 
 # ai:
 #   anthropic:
