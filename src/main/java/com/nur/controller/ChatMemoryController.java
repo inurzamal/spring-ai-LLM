@@ -3,6 +3,7 @@ package com.nur.controller;
 import com.nur.services.ChatMemoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,5 +19,10 @@ public class ChatMemoryController {
             @RequestParam String question) {
 
         return chatMemoryService.testChatMemory(conversationId, question);
+    }
+
+    @GetMapping("/ask-with-memory")
+    public String askWithMemory(@RequestHeader("userId") String userId, @RequestParam String question) {
+        return chatMemoryService.askWithMemory(userId, question);
     }
 }

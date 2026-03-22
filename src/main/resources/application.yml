@@ -1,10 +1,10 @@
 spring:
   application:
-      name: spring-ai-LLM
+    name: spring-ai-LLM
 
   ai:
     openai:
-      api-key: key-from-openai-console
+      api-key: xxxx
 
     ollama:
       base-url: http://localhost:11434
@@ -13,12 +13,17 @@ spring:
 
     google:
       genai:
-        api-key: key-from-google-cloud-console
+        api-key: xxxx
         chat:
           options:
-            model: gemini-2.5-flash
+            model: gemini-2.5-flash-lite
 
 # ai:
 #   anthropic:
 #     api-key:
+
+logging:
+  level:
+    org.springframework.ai.chat.memory: DEBUG
+    org.springframework.ai.chat.client.advisor: DEBUG
 
