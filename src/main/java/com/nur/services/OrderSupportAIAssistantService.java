@@ -1,5 +1,6 @@
 package com.nur.services;
 
+import com.nur.dtos.OrderStatusResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,30 @@ public class OrderSupportAIAssistantService {
                         .param("customerMessage", customerMessage))
                 .call()
                 .content();
+    }
+
+    public OrderStatusResponse getOrderStatus(String orderId, String customerMessage) {
+
+        return geminiChatClient
+                .prompt()
+                .system("""
+                    You are an Order Status API.
+
+                    Return ONLY JSON:
+                    {
+                      "orderId": "string",
+                      "status": "Processing | Shipped | Delivered | Delayed | Cancelled",
+                      "estimatedDelivery": "YYYY-MM-DD or UNKNOWN"
+                    }
+
+                    No explanation. No extra text.
+                """)
+                .user("""
+                    Order ID: %s
+                    Customer message: %s
+                """.formatted(orderId, customerMessage))
+                .call()
+                .entity(OrderStatusResponse.class);
     }
 
 }
