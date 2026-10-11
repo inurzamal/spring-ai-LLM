@@ -7,13 +7,14 @@ import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.memory.repository.jdbc.JdbcChatMemoryRepository;
+import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.google.genai.GoogleGenAiChatModel;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-
+import org.springframework.ai.openai.OpenAiEmbeddingModel;
 import java.util.List;
 
 @Configuration
@@ -57,6 +58,12 @@ public class ChatAIConfiguration {
     @Bean
     public ChatClient ollamaChatClient(OllamaChatModel ollamaChatModel) {
         return ChatClient.builder(ollamaChatModel).build();
+    }
+
+    @Bean
+    @Primary
+    public EmbeddingModel embeddingModel(OpenAiEmbeddingModel model) {
+        return model;
     }
 
 }
